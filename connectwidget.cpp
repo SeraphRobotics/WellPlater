@@ -124,9 +124,8 @@ void ConnectWidget::deviceRemoved(QextPortInfo i){
 
     if (usb)//!port.friendName.isEmpty())
     {
-
         //portList.removeAt(portList.indexOf(i.portName));
-        ui->portBox->removeItem(ui->portBox->findText(i.friendName));
+        ui->portBox->removeItem(ui->portBox->findText(i.friendName.replace("Arduino Mega 2560","Scientist")));
         /**
             TODO: Alert other stages to changes, display warning of some kind.
         **/
