@@ -9,19 +9,29 @@ QT += \
     gui \
     xml \
     script \
-    widgets
+    widgets \
+    webkitwidgets
 
 TARGET = WellPlater
 TEMPLATE = app
 
 SOURCES += \
     main.cpp \ 
-    mainwindow.cpp
+    mainwindow.cpp \
+    printwidget.cpp \
+    printsetupwidget.cpp \
+    connectwidget.cpp
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    printwidget.ui \
+    printsetupwidget.ui \
+    connectwidget.ui
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    printwidget.h \
+    printsetupwidget.h \
+    connectwidget.h
 
 
 INCLUDEPATH += FabConLib

@@ -28,6 +28,7 @@ CoreInterface::~CoreInterface(){
 
 void CoreInterface::setState(SystemState s){
     state_=s;
+    qDebug()<<"CI state: "<<s;
     stateChaged((int)s);
 }
 
@@ -45,6 +46,7 @@ void CoreInterface::setConfig(QString configFile,QString comport){
     LoadConfigThread* configthread = new LoadConfigThread(vm_,document);
     connect(configthread,SIGNAL(loaded()),this,SLOT(configLoaded()));
     connect(configthread,SIGNAL(finished()),configthread,SLOT(deleteLater()));
+    connect(configthread,SIGNAL(failed()),this,SLOT(configFailedToLoad()));
     vm_->moveToThread(configthread);
     QTimer::singleShot(0,configthread,SLOT(start()));
 
@@ -187,6 +189,13 @@ void CoreInterface::cancelPrint(){
     }
 }
 
+void CoreInterface::disconnectVM(){
+    vm_->forceStop();
+    vm_->deleteLater();
+    vm_ = new VirtualPrinter();
+    setState(NotInitialized);
+}
+
 void CoreInterface::forceStop(){
     vm_->forceStop();
     if(vm_->isInitialized()){
@@ -221,7 +230,12 @@ void CoreInterface::XDFLestimated(double t, double v, int cmd){
 }
 
 
+void CoreInterface::configFailedToLoad(){
+    setState(NotInitialized);
+    emit error(vm_->getErrors());
+    emit error("failed to connect");
 
+}
 
 void CoreInterface::configLoaded(){
     setState(Connected);

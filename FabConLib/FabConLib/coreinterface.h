@@ -175,7 +175,7 @@ public slots:
      */
     void forceStop();
 
-
+    void disconnectVM();
 
 private:
     /**
@@ -188,6 +188,7 @@ private slots:
      * used by the load config thread for processing. this should never be called by another object.
      */
     void configLoaded(); //ONLY FOR loadConfigThread
+    void configFailedToLoad();
 
     // XDFL handling
     /**

@@ -44,9 +44,12 @@ void LoadConfigThread::run(){
         }
         if(vm_->isInitialized()){
             emit loaded();
+        }else{
+            emit failed();
         }
 
     }else{
         vm_->moveToThread(QApplication::instance()->thread());
+        emit failed();
     }
 }

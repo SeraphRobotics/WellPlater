@@ -41,6 +41,8 @@ signals:
     */
    void loaded();
 
+   void failed();
+
 public slots:
    /**
     * the function which is called by Start() to do the processing
