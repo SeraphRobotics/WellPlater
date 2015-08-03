@@ -7,6 +7,7 @@
 #include <connectwidget.h>
 #include <printwidget.h>
 #include <printsetupwidget.h>
+#include <materialswidget.h>
 
 namespace Ui {
 class MainWindow;
@@ -28,24 +29,29 @@ public:
 public slots:
     void printerConnected();
     void onStateChaged(int i);
+    void materialNeeded(int i);
     void printDone();
+    void setPause();
+    void setResume();
 
 private slots:
     void errors(QString errs);
     void urlChanged(QUrl url);
 
+
 private:
     void updateState();
     void setUpWidgets();
     void setUpConnections();
-
+    void hideMaterialsWidget();
+    void showMaterialsWidget();
 
 private:
     Ui::MainWindow *ui;
     int current_state;
     bool haveValidFile;
     QextSerialEnumerator* enumerator;
-
+    MaterialsWidget* mw_;
     ConnectWidget* cw_;
     PrintSetupWidget* psw_;
     PrintWidget* pw_;

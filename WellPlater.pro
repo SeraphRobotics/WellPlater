@@ -20,18 +20,27 @@ SOURCES += \
     mainwindow.cpp \
     printwidget.cpp \
     printsetupwidget.cpp \
-    connectwidget.cpp
+    connectwidget.cpp \
+    baydialog.cpp \
+    baywidget.cpp \
+    materialswidget.cpp
 FORMS += \
     mainwindow.ui \
     printwidget.ui \
     printsetupwidget.ui \
-    connectwidget.ui
+    connectwidget.ui \
+    baydialog.ui \
+    baywidget.ui \
+    materialswidget.ui
 
 HEADERS += \
     mainwindow.h \
     printwidget.h \
     printsetupwidget.h \
-    connectwidget.h
+    connectwidget.h \
+    baydialog.h \
+    baywidget.h \
+    materialswidget.h
 
 
 INCLUDEPATH += FabConLib

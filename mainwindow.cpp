@@ -31,6 +31,8 @@ void MainWindow::setUpWidgets()
     cw_ = new ConnectWidget(this,ci_);
     psw_ = new PrintSetupWidget(this, ci_);
     pw_ = new PrintWidget(this,ci_);
+    mw_ = new MaterialsWidget(this,ci_);
+    this->mw_->hide();
 
     ui->stackedWidget->insertWidget(CONNECT,cw_);
     ui->stackedWidget->insertWidget(SETUP,psw_);
@@ -53,7 +55,23 @@ void MainWindow::setUpConnections()
 
     connect(this, SIGNAL(sendReloadConfigCommand()), cw_, SLOT(reLoadConfigFiles()));
 
+    connect(pw_, SIGNAL(pause()), this, SLOT(setPause()));
+//    connect(pw_, SIGNAL(stop()), this, SLOT(setStop()));
+//    connect(pw_, SIGNAL(cancel()), this, SLOT(setStop()));
+    connect(pw_, SIGNAL(resume()), this, SLOT(setResume()));
+
+
     connect(ui->webView,SIGNAL(urlChanged(QUrl)),this,SLOT(urlChanged(QUrl)));
+}
+
+void MainWindow::hideMaterialsWidget(){
+    this->mw_->hide();
+    ui->widgetVLayout->removeWidget(this->mw_);
+}
+
+void MainWindow::showMaterialsWidget(){
+    ui->widgetVLayout->addWidget(this->mw_);
+    this->mw_->show();
 }
 
 void MainWindow::urlChanged(QUrl url){
@@ -100,12 +118,15 @@ void MainWindow::onStateChaged(int i){
         current_state=SETUP;
         printerConnected();
         psw_->setHasFile(false);
+        showMaterialsWidget();
     }else if(i==CoreInterface::FileLoaded){
         current_state=SETUP;
         qDebug()<<"File Loaded...";
         haveValidFile = true;
         psw_->setHasFile(true);
+        showMaterialsWidget();
     }else if(i==CoreInterface::Printing){
+        hideMaterialsWidget();
         current_state=PRINT;
         qDebug()<<"Printing...";
     }else{
@@ -113,6 +134,22 @@ void MainWindow::onStateChaged(int i){
         psw_->setHasFile(false);
     }
     updateState();
+}
+
+void MainWindow::materialNeeded(int i){
+    setPause();
+    pw_->setPaused();
+}
+
+
+void MainWindow::setPause()
+{
+    showMaterialsWidget();
+}
+
+void MainWindow::setResume()
+{
+    hideMaterialsWidget();
 }
 
 void MainWindow::errors(QString errs){
