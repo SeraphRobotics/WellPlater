@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QWebFrame>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,6 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     enumerator = new QextSerialEnumerator();
     setUpWidgets();
     setUpConnections();
+    QSettings s;
+    QUrl url = s.value("home-url","http://www.SeraphRobotics.com").toUrl();
+    ui->webView->setUrl(url);
 
 }
 
@@ -48,6 +52,14 @@ void MainWindow::setUpConnections()
     connect(ci_,SIGNAL(error(QString)),this,SLOT(errors(QString)));
 
     connect(this, SIGNAL(sendReloadConfigCommand()), cw_, SLOT(reLoadConfigFiles()));
+
+    connect(ui->webView,SIGNAL(urlChanged(QUrl)),this,SLOT(urlChanged(QUrl)));
+}
+
+void MainWindow::urlChanged(QUrl url){
+    QWebFrame* theframe = ui->webView->page()->mainFrame();
+    theframe->addToJavaScriptWindowObject("coreinterface",ci_);
+    qDebug()<<url;
 }
 
 

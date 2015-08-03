@@ -32,11 +32,13 @@ public slots:
 
 private slots:
     void errors(QString errs);
+    void urlChanged(QUrl url);
 
 private:
     void updateState();
     void setUpWidgets();
     void setUpConnections();
+
 
 private:
     Ui::MainWindow *ui;

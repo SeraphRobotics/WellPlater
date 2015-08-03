@@ -21,7 +21,9 @@ int main(int argc, char *argv[])
     //   load config next time index
     //   last used fab file
 
-
+    QSettings s;
+    s.setValue("home-url","http://mark-broomfield.com/seraph/#/login.html");
+    s.sync();
     MainWindow w;
 
     w.show();
