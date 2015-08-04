@@ -4,7 +4,7 @@
 <script>
 function myFunction() {
     document.getElementById("demo").style.color = "yellow";
-    var xdfl = '<?xmlversion="1.0"encoding="UTF-8"standalone="yes"?><xdfl><palette><material><id>1</id><name>default</name><pathWidth>0.8</pathWidth><pathHeight>0.8</pathHeight><pathSpeed>30.0</pathSpeed><areaConstant>1.0</areaConstant><compressionVolume>0.0</compressionVolume></material></palette><commands><path><materialId>1</materialId><point><x>0.0</x><y>0.0</y><z>0.8</z></point><point><x>50.0</x><y>0.0</y><z>0.8</z></point></path><path><speed>30</speed><point><x>50.0</x><y>0.0</y><z>0.8</z></point><point><x>50.0</x><y>0.0</y><z>2.8</z></point><point><x>0.0</x><y>0.0</y><z>2.8</z></point><point><x>0.0</x><y>0.0</y><z>0.8</z></point></path></commands></xdfl>'
+    var xdfl = '<xdfl><palette><material><id>1</id><name>default</name><pathWidth>0.8</pathWidth><pathHeight>0.8</pathHeight><pathSpeed>30.0</pathSpeed><areaConstant>1.0</areaConstant><compressionVolume>0.0</compressionVolume></material></palette><commands><path><materialId>1</materialId><point><x>0.0</x><y>0.0</y><z>0.8</z></point><point><x>50.0</x><y>0.0</y><z>0.8</z></point></path><path><speed>30</speed><point><x>50.0</x><y>0.0</y><z>0.8</z></point><point><x>50.0</x><y>0.0</y><z>2.8</z></point><point><x>0.0</x><y>0.0</y><z>2.8</z></point><point><x>0.0</x><y>0.0</y><z>0.8</z></point></path></commands></xdfl>'
     try{
         coreinterface.setXDFL(xdfl);
         document.getElementById("demo").style.color = "green";
