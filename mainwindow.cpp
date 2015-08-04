@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QUrl url = s.value("home-url","http://www.SeraphRobotics.com").toUrl();
     ui->webView->setUrl(url);
 
+
+
+
 }
 
 MainWindow::~MainWindow()

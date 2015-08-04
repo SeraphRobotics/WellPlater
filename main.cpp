@@ -22,7 +22,8 @@ int main(int argc, char *argv[])
     //   last used fab file
 
     QSettings s;
-    s.setValue("home-url","http://mark-broomfield.com/seraph/#/login.html");
+    //s.setValue("home-url","http://mark-broomfield.com/seraph/#/login.html");
+    s.setValue("home-url",QUrl::fromLocalFile("C://Users//Jeffrey//Documents//GitHub//WellPlater//Media//test.html"));
     s.sync();
     MainWindow w;
 
